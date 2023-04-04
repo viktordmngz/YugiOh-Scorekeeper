@@ -82,7 +82,7 @@ class player:
 		while True:
 			sleep(1.5)
 			try:
-				delay_readout(f"\n\nEnter your attack's power: ")
+				delay_readout(f"\n\nEnter {self.name}'s' attack's power: ")
 				attack = int(input())
 				break
 			except ValueError:
@@ -96,6 +96,7 @@ class player:
 		player2.bars = (1-player2.lifepoints/player2.startingPoints)* 20
 		player2.health = "="*int(player2.bars)
 		delay_readout(f"\n\n{self.name} attacked for {total} damage.")
+		sleep(1.2)
 
 if __name__ == '__main__':
 	delay_readout("\nEnter the starting lifepoints or hit ENTER for the default: ")
