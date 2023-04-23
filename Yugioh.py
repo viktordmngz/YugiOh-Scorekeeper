@@ -2,7 +2,7 @@
 Created By: Viktor Dominguez
 Tested By: Viktor Dominguez
 Date Started: 02/12/2023 (mm/dd/yyyy)
-Last Updated: 04/03/2023 (mm/dd/yyyy)
+Last Updated: 04/22/2023 (mm/dd/yyyy)
 Editor: Sublime Text
 
 ------------
@@ -71,31 +71,29 @@ class player:
 #
 		while True:
 			try:
-				delay_readout(f"\n\nPlease enter in {player2.name}'s defense points: ")
+				print(f"\n\nPlease enter in {player2.name}'s defense points: ")
 				player2.defense = int(input())
 				break
 			except ValueError:
-				delay_readout(f"\n\nYou have entered an invalid value.")
-				sleep(1.5)
+				print(f"\n\nYou have entered an invalid value.")
 				continue
-			delay_readout(f"\n\n{self.name} attacks!")
+			print(f"\n\n{self.name} attacks!")
 		while True:
-			sleep(1.5)
 			try:
-				delay_readout(f"\n\nEnter {self.name}'s' attack's power: ")
+				print(f"\n\nEnter {self.name}'s' attack's power: ")
 				attack = int(input())
 				break
 			except ValueError:
-				delay_readout(f"\n\nPlease enter in a valid number")
+				print(f"\n\nPlease enter in a valid number")
 		total = attack - player2.defense
 		if total < 0:
-			delay_readout(f"\n\n{self.name} failed to inflict any damage to {player2.name}'s life points.")
+			print(f"\n\n{self.name} failed to inflict any damage to {player2.name}'s life points.")
 			return
 		player2.lifepoints -= total
 		# Want the percentage of lifepoints left * 20 bars 
-		player2.bars = (1-player2.lifepoints/player2.startingPoints)* 20
+		player2.bars = (player2.lifepoints/player2.startingPoints)* 20
 		player2.health = "="*int(player2.bars)
-		delay_readout(f"\n\n{self.name} attacked for {total} damage.")
+		print(f"\n\n{self.name} attacked for {total} damage.")
 		sleep(1.2)
 
 if __name__ == '__main__':
@@ -120,19 +118,15 @@ if __name__ == '__main__':
 			player1.playerturn(player2)
 			if player1.lifepoints <= 0:
 				delay_readout(f"\n\n{player2.name} wins!\n\n")
-				sleep(1.5)
 				break
 			elif player2.lifepoints <= 0:
 				delay_readout(f"\n\n{player1.name} wins!\n\n")
-				sleep(1.5)
 				break
 			player2.playerturn(player1)
 			if player1.lifepoints <= 0:
 				delay_readout(f"\n\n{player2.name} wins!\n\n")
-				sleep(1.5)
 				break
 			elif player2.lifepoints <= 0:
 				delay_readout(f"\n\n{player1.name} wins!\n\n")
-				sleep(1.5)
 				break
 	game(player1, player2)
