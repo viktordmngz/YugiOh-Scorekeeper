@@ -91,11 +91,8 @@ class player:
 			return
 		player2.lifepoints -= total
 		# Want the percentage of lifepoints left * 20 bars 
-		if player2.lifepoints == player2.startingPoints:
-			player2.bars = 20
-		else:
-			player2.bars = (player2.lifepoints/player2.startingPoints)*20
-		player2.health = "= "*(int(player2.bars)+1)
+		player2.bars = max(1, (player2.lifepoints/player2.startingPoints)*20)
+		player2.health = "= "*int(player2.bars)
 		print(f"\n\n{self.name} attacked for {total} damage.")
 		sleep(1.2)
 
