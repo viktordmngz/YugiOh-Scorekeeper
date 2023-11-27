@@ -2,7 +2,7 @@
 Created By: Viktor Dominguez
 Tested By: Viktor Dominguez
 Date Started: 02/12/2023 (mm/dd/yyyy)
-Last Updated: 04/22/2023 (mm/dd/yyyy)
+Last Updated: 11/27/2023 (mm/dd/yyyy)
 Editor: Sublime Text
 
 ------------
@@ -54,7 +54,7 @@ class player:
 		self.name = name
 		self.lifepoints = lifepoints
 		# Display of health bars (=)
-		self.health = "="*20
+		self.health = "= "*20
 		# Bars will always mod to 20
 		self.bars = 20
 		# Defense of monsters
@@ -86,13 +86,16 @@ class player:
 			except ValueError:
 				print(f"\n\nPlease enter in a valid number")
 		total = attack - player2.defense
-		if total < 0:
+		if total <= 0:
 			print(f"\n\n{self.name} failed to inflict any damage to {player2.name}'s life points.")
 			return
 		player2.lifepoints -= total
 		# Want the percentage of lifepoints left * 20 bars 
-		player2.bars = (player2.lifepoints/player2.startingPoints)* 20
-		player2.health = "="*int(player2.bars)
+		if player2.lifepoints == player2.startingPoints:
+			player2.bars = 20
+		else:
+			player2.bars = (player2.lifepoints/player2.startingPoints)*20
+		player2.health = "= "*(int(player2.bars)+1)
 		print(f"\n\n{self.name} attacked for {total} damage.")
 		sleep(1.2)
 
@@ -116,17 +119,20 @@ if __name__ == '__main__':
 		delay_readout("\n\nIt's time to d-d-d-d-d-d-duel!")
 		while player1.lifepoints and player2.lifepoints > 0:
 			player1.playerturn(player2)
-			if player1.lifepoints <= 0:
-				delay_readout(f"\n\n{player2.name} wins!\n\n")
-				break
-			elif player2.lifepoints <= 0:
+			#if player1.lifepoints <= 0:
+				#delay_readout(f"\n\n{player2.name} wins!\n\n")
+				#break
+			#elif player2.lifepoints <= 0:
+				#delay_readout(f"\n\n{player1.name} wins!\n\n")
+				#break
+			if player2.lifepoints <= 0:
 				delay_readout(f"\n\n{player1.name} wins!\n\n")
 				break
 			player2.playerturn(player1)
 			if player1.lifepoints <= 0:
 				delay_readout(f"\n\n{player2.name} wins!\n\n")
 				break
-			elif player2.lifepoints <= 0:
-				delay_readout(f"\n\n{player1.name} wins!\n\n")
-				break
+			#elif player2.lifepoints <= 0:
+				#delay_readout(f"\n\n{player1.name} wins!\n\n")
+				#break
 	game(player1, player2)
